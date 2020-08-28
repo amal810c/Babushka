@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        article {
+            border: 1px solid black;
+            padding: 10px;
+
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        section {
+            width: 90vw;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        #mad {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Menu</h1>
+    <section class="container"></section>
+
+    <template>
+        <article id="mad">
+            <img src="" alt="">
+            <h2 class="navn"></h2>
+            <p class="kort"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("DOM content loaded");
+        }
+
+
+        let temp = document.querySelector("template");
+        let container = document.querySelector("section");
+
+        const link = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
+
+        async function hentdata() {
+            const respons = await fetch(link);
+            const json = await respons.json();
+            vis(json);
+        }
+
+        function vis(retter) {
+            console.log(retter);
+            retter.feed.entry.forEach(mad => {
+
+                const klon = temp.cloneNode(true).content;
+                klon.querySelector(".navn").textContent = mad.gsx$navn.$t;
+                klon.querySelector(".kort").textContent = mad.gsx$kort.$t;
+                klon.querySelector(".pris").textContent = "Pris: " + mad.gsx$pris.$t + ",-";
+                klon.querySelector("img").src = "imgs/small/" + mad.gsx$billede.$t + "-sm.jpg";
+                container.appendChild(klon);
+
+            })
+        }
+
+        hentdata();
+    </script>
+</body></html>
