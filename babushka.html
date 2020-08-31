@@ -28,11 +28,39 @@
         #mad {
             text-align: center;
         }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        button {
+            border: 1px dotted black;
+            font-family: monospace;
+            border-radius: 15px 50px;
+        }
+
+        .valgt {
+            color: white;
+            background-color: #4d88ad;
+        }
+
+        h1 {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
     <h1>Menu</h1>
+    <header>
+        <button class="filter" data-kategori="alle">Alle</button>
+        <button class="filter" data-kategori="f">Forretter</button>
+        <button class="filter" data-kategori="h">Hovedretter</button>
+        <button class="filter valgt" data-kategori="d">Desserter</button>
+        <button class="filter" data-kategori="s">Sideorders</button>
+        <button class="filter" data-kategori="drik">Drikkevarer</button>
+    </header>
     <section class="container"></section>
 
     <template>
