@@ -4,16 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Bistro Babushka</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
     <style>
-        article {
-            border: 1px solid black;
-            padding: 10px;
-
+        body {
+            background-color: beige;
         }
 
-        img {
-            max-width: 100%;
+        article {
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 15px;
+
         }
 
         section {
@@ -23,6 +26,11 @@
             display: grid;
             grid-gap: 20px;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+        }
+
+        img {
+            width: 100%;
         }
 
         #mad {
@@ -30,32 +38,67 @@
         }
 
         header {
-            text-align: center;
             padding-bottom: 20px;
+            padding-left: 200px;
         }
 
         button {
-            border: 1px dotted black;
-            font-family: monospace;
-            border-radius: 15px 50px;
+            border: 1px solid black;
+            font-family: 'DM Serif Display', serif;
+            border-radius: 15px;
+        }
+
+        button:hover {
+            background-color: #44176C;
+            color: white;
         }
 
         .valgt {
             color: white;
-            background-color: #4d88ad;
+            background-color: #5E88BF;
         }
 
-        h1,
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            padding-left: 200px;
+        }
+
+
         h2 {
-            text-align: center;
+            font-family: 'DM Serif Display', serif;
+
+        }
+
+        #overskrift {
+            font-family: 'DM Serif Display', serif;
+            padding-left: 200px;
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #splash img {
+            display: grid;
+            margin: 0 auto;
+            width: 60%;
+        }
+
+        hr {
+            border: 5px solid #5E88BF;
         }
 
     </style>
 </head>
 
 <body>
+    <figure id="splash">
+        <img src="billeder/Artboard%202@3x.png" alt="bab">
+    </figure>
+    <hr>
     <h1>Menu</h1>
-    <h2>Alle</h2>
+    <h2 id="overskrift">Alle</h2>
+
     <header>
         <button class="filter valgt" data-kategori="alle">Alle</button>
         <button class="filter" data-kategori="forretter">Forretter</button>
@@ -64,6 +107,8 @@
         <button class="filter" data-kategori="sideorders">Sideorders</button>
         <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
     </header>
+
+
     <section class="container"></section>
 
     <template>
