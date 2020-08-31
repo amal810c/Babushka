@@ -55,26 +55,30 @@
 
         let temp = document.querySelector("template");
         let container = document.querySelector("section");
+        let json;
+        let filter = "desserter";
 
         const link = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
 
         async function hentdata() {
             const respons = await fetch(link);
-            const json = await respons.json();
+            json = await respons.json();
             vis(json);
         }
 
         function vis(retter) {
             console.log(retter);
             retter.feed.entry.forEach(mad => {
+                if (filter == mad.gsx$kategori.$t) {
 
-                const klon = temp.cloneNode(true).content;
-                klon.querySelector(".navn").textContent = mad.gsx$navn.$t;
-                klon.querySelector(".kort").textContent = mad.gsx$kort.$t;
-                klon.querySelector(".pris").textContent = "Pris: " + mad.gsx$pris.$t + ",-";
-                klon.querySelector("img").src = "imgs/small/" + mad.gsx$billede.$t + "-sm.jpg";
-                container.appendChild(klon);
 
+                    const klon = temp.cloneNode(true).content;
+                    klon.querySelector(".navn").textContent = mad.gsx$navn.$t;
+                    klon.querySelector(".kort").textContent = mad.gsx$kort.$t;
+                    klon.querySelector(".pris").textContent = "Pris: " + mad.gsx$pris.$t + ",-";
+                    klon.querySelector("img").src = "imgs/small/" + mad.gsx$billede.$t + "-sm.jpg";
+                    container.appendChild(klon);
+                }
             })
         }
 
