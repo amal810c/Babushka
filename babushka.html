@@ -124,6 +124,10 @@
         function filterBTNs() {
             filter = this.dataset.kategori;
             document.querySelector("h2").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach((btn) => {
+                btn.classList.remove("valgt");
+            })
+            this.classList.add("valgt");
             vis(json);
         }
 
