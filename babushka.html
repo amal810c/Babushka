@@ -6,89 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: beige;
-        }
+    <link rel="icon" type="image/png" sizes="16x16" href="billeder/favicon-16x16.png">
+    <link rel="stylesheet" href="style.css">
 
-        article {
-            background-color: white;
-            border: 1px solid black;
-            padding: 10px;
-            border-radius: 15px;
-
-        }
-
-        section {
-            width: 90vw;
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-gap: 20px;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-        }
-
-        img {
-            width: 100%;
-        }
-
-        #mad {
-            text-align: center;
-        }
-
-        header {
-            padding-bottom: 20px;
-            padding-left: 200px;
-        }
-
-        button {
-            border: 1px solid black;
-            font-family: 'DM Serif Display', serif;
-            border-radius: 15px;
-        }
-
-        button:hover {
-            background-color: #44176C;
-            color: white;
-        }
-
-        .valgt {
-            color: white;
-            background-color: #5E88BF;
-        }
-
-        h1 {
-            font-family: 'DM Serif Display', serif;
-            padding-left: 200px;
-        }
-
-
-        h2 {
-            font-family: 'DM Serif Display', serif;
-
-        }
-
-        #overskrift {
-            font-family: 'DM Serif Display', serif;
-            padding-left: 200px;
-        }
-
-        p {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        #splash img {
-            display: grid;
-            margin: 0 auto;
-            width: 60%;
-        }
-
-        hr {
-            border: 5px solid #5E88BF;
-        }
-
-    </style>
 </head>
 
 <body>
@@ -120,65 +40,21 @@
         </article>
     </template>
 
+    <section id="popup">
+        <article>
+            <button id="luk">X</button>
+            <img src="" alt="">
+            <div>
+                <h2></h2>
+                <p>Beskrivelse: <span class="lang"></span></p>
+                <p>Oprindelse: <span class="land"></span></p>
+                <p>Pris: <span class="price"></span></p>
+            </div>
+        </article>
+    </section>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", start);
+    <script src="script.js"></script>
 
-        function start() {
-            console.log("DOM content loaded");
-        }
-
-
-        let temp = document.querySelector("template");
-        let container = document.querySelector("section");
-        let json;
-        let filter = "alle";
-
-        const link = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
-
-        async function hentdata() {
-            const respons = await fetch(link);
-            json = await respons.json();
-            addEventListenerToButtons();
-            vis(json);
-        }
-
-        function vis(retter) {
-            console.log(retter);
-            container.innerHTML = "";
-            retter.feed.entry.forEach(mad => {
-                if (filter == "alle" || filter == mad.gsx$kategori.$t) {
-
-
-                    const klon = temp.cloneNode(true).content;
-                    klon.querySelector(".navn").textContent = mad.gsx$navn.$t;
-                    klon.querySelector(".kort").textContent = mad.gsx$kort.$t;
-                    klon.querySelector(".pris").textContent = "Pris: " + mad.gsx$pris.$t + ",-";
-                    klon.querySelector("img").src = "imgs/small/" + mad.gsx$billede.$t + "-sm.jpg";
-                    container.appendChild(klon);
-                }
-            })
-        }
-
-        function addEventListenerToButtons() {
-            document.querySelectorAll(".filter").forEach((btn) => {
-                btn.addEventListener("click", filterBTNs);
-            });
-        }
-
-        function filterBTNs() {
-            filter = this.dataset.kategori;
-            document.querySelector("h2").textContent = this.textContent;
-            document.querySelectorAll(".filter").forEach((btn) => {
-                btn.classList.remove("valgt");
-            })
-            this.classList.add("valgt");
-            vis(json);
-        }
-
-        hentdata();
-
-    </script>
 </body>
 
 </html>
